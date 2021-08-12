@@ -38,15 +38,6 @@ export function run(appRoot: string, handler: string): void {
     errorCallbacks.uncaughtException(error);
   });
 
-  process.on("unhandledRejection", (reason, promise) => {
-    const error = new Errors.UnhandledPromiseRejection(
-      reason?.toString(),
-      promise
-    );
-    console.error("Unhandled Promise Rejection", Errors.toFormatted(error));
-    errorCallbacks.unhandledRejection(error);
-  });
-
   BeforeExitListener.reset();
   process.on("beforeExit", BeforeExitListener.invoke);
 
